@@ -7,7 +7,7 @@ clear all;
 clc; 
 close all;
 
-
+rand('seed', 0);
 
 nx = 2;
 
@@ -61,16 +61,13 @@ for expt = 1:nExpt
        srckfObj = srckfObj.Predict(xkk, Skk);
        
        %%%=================================================================
-       %%% You may use either Update or Update2; Update2 is a more refined
+       %%% Update2 is a more refined
        %%% version of the square-root CKF
        %%%=================================================================
        
         z = zArray(:,k); % measurement
         srckfObj = srckfObj.Update(z);
-        
-       %[xkk,Skk] = Update(xkk1,Skk1,zArray(:,k));
-
-%        [xkk,Skk] = Update2(xkk1,Skk1,zArray(:,k));
+        %srckfObj = srckfObj.Update2(z);
 
         % Get outputs
         xkk = srckfObj.xkk;
